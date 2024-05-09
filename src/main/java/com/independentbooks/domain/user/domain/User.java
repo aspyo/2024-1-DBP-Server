@@ -1,6 +1,7 @@
 package com.independentbooks.domain.user.domain;
 
 import com.independentbooks.domain.common.BaseEntity;
+import com.independentbooks.domain.review.domain.Review;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="User")
@@ -43,6 +45,9 @@ public class User extends BaseEntity {
 
     @Column(name = "is_withdrawal")
     private boolean isWithdrawal;
+
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
 
     @Builder
     public User(String signUpId, String name, String email, String password, String nickname, String phoneNumber, LocalDateTime withdrawalDate, boolean isWithdrawal) {

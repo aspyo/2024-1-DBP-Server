@@ -1,12 +1,14 @@
 package com.independentbooks.domain.book.domain;
 
 import com.independentbooks.domain.common.BaseEntity;
+import com.independentbooks.domain.review.domain.Review;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="Book")
@@ -39,6 +41,9 @@ public class Book extends BaseEntity {
 
     @Column(name="image", nullable = false) //도서 표지 이미지
     private String image;
+
+    @OneToMany(mappedBy = "book")
+    private List<Review> reviews;
 
     @Builder
     public Book(String title, String publisher, String isbn, String bookInfo, int price, LocalDateTime publishedDate, String image) {

@@ -17,8 +17,8 @@ public class Content {
     @Column(name = "content_id")
     private Long id;
 
-    @OneToMany(mappedBy = "content")
-    private List<Collection> collections = new ArrayList<>();
+//    @OneToMany(mappedBy = "content")
+//    private List<Collection> collections = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private ContentType contentType;

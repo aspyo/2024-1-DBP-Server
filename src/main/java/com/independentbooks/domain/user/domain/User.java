@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
 public class User {
@@ -18,7 +19,9 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    // Collection 과 1:N 관계
-    @OneToMany(mappedBy = "user")
-    private List<Collection> collections = new ArrayList<>();
+    private String name;
+
+//    // Collection 과 1:N 관계
+//    @OneToMany(mappedBy = "user")
+//    private List<Collection> collections = new ArrayList<>();
 }

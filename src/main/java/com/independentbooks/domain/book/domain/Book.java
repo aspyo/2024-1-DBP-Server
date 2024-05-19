@@ -18,7 +18,9 @@ public class Book {
     @Column(name = "book_id")
     private Long id;
 
+    private String title;
+
     // 컬렉션과 N:N 관계
-    @ManyToMany(mappedBy = "books")
-    private List<Collection> collections = new ArrayList<>();
+//    @ManyToMany(mappedBy = "books")
+//    private List<Collection> collections = new ArrayList<>();
 }

@@ -1,4 +1,4 @@
-package com.independentbooks.domain.book.domain;
+package com.independentbooks.domain.content.domain;
 
 import com.independentbooks.domain.collection.domain.Collection;
 import jakarta.persistence.*;
@@ -11,16 +11,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Book {
+public class Content {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "book_id")
+    @Id @GeneratedValue
+    @Column(name = "content_id")
     private Long id;
 
-    private String title;
-
-    // 컬렉션과 N:N 관계
-//    @ManyToMany(mappedBy = "books")
+//    @OneToMany(mappedBy = "content")
 //    private List<Collection> collections = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private ContentType contentType;
 }

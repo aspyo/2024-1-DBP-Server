@@ -1,4 +1,4 @@
-package com.independentbooks.domain.book.domain;
+package com.independentbooks.domain.user.domain;
 
 import com.independentbooks.domain.collection.domain.Collection;
 import jakarta.persistence.*;
@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
-public class Book {
+public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "book_id")
+    @Column(name = "user_id")
     private Long id;
 
-    private String title;
+    private String name;
 
-    // 컬렉션과 N:N 관계
-//    @ManyToMany(mappedBy = "books")
+//    // Collection 과 1:N 관계
+//    @OneToMany(mappedBy = "user")
 //    private List<Collection> collections = new ArrayList<>();
 }

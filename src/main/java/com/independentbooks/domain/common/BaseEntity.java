@@ -12,20 +12,21 @@ import java.time.LocalDateTime;
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity {
+public class BaseEntity {
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(name = "created_at", updatable=false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(name = "modified_at")
     private LocalDateTime modifiedAt;
 
     @Enumerated(value = EnumType.STRING)
-    Status status = Status.ACTIVE;
+    @Column(name = "status")
+    private Status status = Status.ACTIVE;
 
     public void updateStatus(Status status) {
         this.status = status;
     }
-
 }

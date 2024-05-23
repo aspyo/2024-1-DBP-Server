@@ -1,5 +1,6 @@
 package com.independentbooks.domain.user.domain;
 
+
 import com.independentbooks.domain.common.BaseEntity;
 import com.independentbooks.domain.like.domain.Like;
 import com.independentbooks.domain.review.domain.Review;
@@ -52,6 +53,10 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<Like> likes;
+  
+  //    // Collection 과 1:N 관계
+//    @OneToMany(mappedBy = "user")
+//    private List<Collection> collections = new ArrayList<>();
 
     @Builder
     public User(Long userId){

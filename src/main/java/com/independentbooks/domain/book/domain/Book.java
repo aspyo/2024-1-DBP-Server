@@ -52,6 +52,10 @@ public class Book extends BaseEntity {
 
     @OneToMany(mappedBy = "book")
     private List<Like> likes;
+  
+    // 컬렉션과 N:N 관계
+//     @ManyToMany(mappedBy = "books")
+//     private List<Collection> collections = new ArrayList<>();
 
     @Builder
     public Book(String title, String author, String publisher, String isbn, String bookInfo, Long price, LocalDateTime publishedDate, String image) {
@@ -64,6 +68,4 @@ public class Book extends BaseEntity {
         this.publishedDate = publishedDate;
         this.image = image;
     }
-
-
 }

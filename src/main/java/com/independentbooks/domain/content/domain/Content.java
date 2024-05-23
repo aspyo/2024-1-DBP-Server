@@ -23,11 +23,12 @@ public class Content {
 
     @OneToMany(mappedBy = "content")
     private List<Review> reviews;
+  
+  //    @OneToMany(mappedBy = "content")
+//    private List<Collection> collections = new ArrayList<>();
 
     @Builder
     public Content(ContentType contentType) {
         this.contentType = contentType;
     }
-
-
 }

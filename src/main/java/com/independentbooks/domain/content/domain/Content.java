@@ -1,25 +1,34 @@
 package com.independentbooks.domain.content.domain;
 
-import com.independentbooks.domain.collection.domain.Collection;
+import com.independentbooks.domain.review.domain.Review;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name="Content")
+@NoArgsConstructor
 @Getter
-@Setter
 public class Content {
-
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "content_id")
-    private Long id;
+    private Long contentId;
 
-//    @OneToMany(mappedBy = "content")
+    @Column(name="content_type", nullable = false)
+    private ContentType contentType;
+
+    @OneToMany(mappedBy = "content")
+    private List<Review> reviews;
+  
+  //    @OneToMany(mappedBy = "content")
 //    private List<Collection> collections = new ArrayList<>();
 
-    @Enumerated(EnumType.STRING)
-    private ContentType contentType;
+    @Builder
+    public Content(ContentType contentType) {
+        this.contentType = contentType;
+    }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name="Content")
 @NoArgsConstructor
 @Getter
+@Setter
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

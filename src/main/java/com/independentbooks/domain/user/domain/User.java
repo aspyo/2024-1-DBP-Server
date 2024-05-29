@@ -5,10 +5,7 @@ import com.independentbooks.domain.common.BaseEntity;
 import com.independentbooks.domain.like.domain.Like;
 import com.independentbooks.domain.review.domain.Review;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +14,7 @@ import java.util.List;
 @Table(name="User")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 public class User extends BaseEntity {
 
     @Id
@@ -27,8 +25,8 @@ public class User extends BaseEntity {
 //    @Column(name="sign_up_id")
 //    private String signUpId;
 //
-//    @Column(name="name")
-//    private String name;
+    @Column(name="name")
+    private String name;
 //
 //    @Column(name="email")
 //    private String email;

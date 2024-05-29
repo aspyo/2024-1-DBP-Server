@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,11 @@ public class CollectionService {
     // 컬렉션 생성
     public void create(Collection collection) {
         collectionRepository.save(collection);
+    }
+
+    // Id로 컬렉션 조회
+    public Collection findById(Long id) {
+        return collectionRepository.findCollection(id);
     }
 
     // 모든 컬렉션 조회

@@ -122,5 +122,10 @@ public class BookService {
                 .map(result -> (Book) result[0])
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
 }
 

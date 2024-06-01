@@ -110,9 +110,9 @@ public class BookService {
 
     @Transactional(readOnly = true)
     public List<Book> getNewBooksList() {
-        LocalDateTime oneMonthsAgo = LocalDateTime.now().minusMonths(1);
+        LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
         return bookRepository.findAll().stream()
-                .filter(b -> b.getPublishedDate().isAfter(oneMonthsAgo))
+                .filter(b -> b.getPublishedDate().isAfter(threeMonthsAgo))
                 .collect(Collectors.toList());
     }
 

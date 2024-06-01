@@ -5,6 +5,8 @@ import com.independentbooks.domain.book.domain.repository.BookRepository;
 import com.independentbooks.domain.book.dto.response.BookDetailRes;
 import com.independentbooks.domain.book.dto.response.BookListRes;
 import com.independentbooks.domain.like.domain.repository.LikeRepository;
+import com.independentbooks.domain.review.domain.Review;
+import com.independentbooks.domain.review.domain.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final LikeRepository likeRepository;
+    private final ReviewRepository reviewRepository;
 
     @Transactional(readOnly = true)
     public ResponseEntity<?> getBasicBooks() {
@@ -87,6 +90,7 @@ public class BookService {
     @Transactional(readOnly = true)
     public ResponseEntity<?> getBookDetail(Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new IllegalArgumentException("해당 도서를 찾을 수 없습니다. ID: " + bookId));
+        List<Review> reviews = reviewRepository.findAllByBook(book);
         // 표지,제목,가격,줄거리,저자,출판사,출판일,ISBN,리뷰목록
         BookDetailRes bookDetailRes = BookDetailRes.builder()
                 .image(book.getImage())
@@ -97,7 +101,7 @@ public class BookService {
                 .publisher(book.getPublisher())
                 .pubDate(book.getPublishedDate().toString())
                 .isbn(book.getIsbn())
-                .reviews(book.getReviews())
+                .reviews(reviews)
                 .build();
 
         return ResponseEntity.ok(bookDetailRes);
@@ -106,9 +110,9 @@ public class BookService {
 
     @Transactional(readOnly = true)
     public List<Book> getNewBooksList() {
-        LocalDateTime threeMonthsAgo = LocalDateTime.now().minusMonths(3);
+        LocalDateTime oneMonthsAgo = LocalDateTime.now().minusMonths(1);
         return bookRepository.findAll().stream()
-                .filter(b -> b.getPublishedDate().isAfter(threeMonthsAgo))
+                .filter(b -> b.getPublishedDate().isAfter(oneMonthsAgo))
                 .collect(Collectors.toList());
     }
 

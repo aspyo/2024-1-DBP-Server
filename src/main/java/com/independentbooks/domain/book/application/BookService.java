@@ -4,9 +4,12 @@ import com.independentbooks.domain.book.domain.Book;
 import com.independentbooks.domain.book.domain.repository.BookRepository;
 import com.independentbooks.domain.book.dto.response.BookDetailRes;
 import com.independentbooks.domain.book.dto.response.BookListRes;
+import com.independentbooks.domain.book.dto.response.ReviewRes;
 import com.independentbooks.domain.like.domain.repository.LikeRepository;
 import com.independentbooks.domain.review.domain.Review;
 import com.independentbooks.domain.review.domain.repository.ReviewRepository;
+import com.independentbooks.domain.user.domain.User;
+import com.independentbooks.domain.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final LikeRepository likeRepository;
     private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public ResponseEntity<?> getBasicBooks() {
@@ -91,6 +95,15 @@ public class BookService {
     public ResponseEntity<?> getBookDetail(Long bookId) {
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new IllegalArgumentException("해당 도서를 찾을 수 없습니다. ID: " + bookId));
         List<Review> reviews = reviewRepository.findAllByBook(book);
+        List<ReviewRes> reviewRes = reviews.stream()
+                .map(review -> ReviewRes.builder()
+                        .reviewId(review.getReviewId())
+                        .reviewContent(review.getReviewContent())
+                        .userNickName(review.getUser().getNickname())
+                        .build())
+                .collect(Collectors.toList());
+
+
         // 표지,제목,가격,줄거리,저자,출판사,출판일,ISBN,리뷰목록
         BookDetailRes bookDetailRes = BookDetailRes.builder()
                 .image(book.getImage())
@@ -101,11 +114,10 @@ public class BookService {
                 .publisher(book.getPublisher())
                 .pubDate(book.getPublishedDate().toString())
                 .isbn(book.getIsbn())
-                .reviews(reviews)
+                .reviews(reviewRes)
                 .build();
 
         return ResponseEntity.ok(bookDetailRes);
-
     }
 
     @Transactional(readOnly = true)

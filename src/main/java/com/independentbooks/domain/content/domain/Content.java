@@ -20,6 +20,7 @@ public class Content {
     @Column(name = "content_id")
     private Long contentId;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="content_type", nullable = false)
     private ContentType contentType;
 

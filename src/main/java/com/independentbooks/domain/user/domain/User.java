@@ -34,8 +34,8 @@ public class User extends BaseEntity {
 //    @Column(name = "password")
 //    private String password;
 //
-//    @Column(name = "nickname")
-//    private String nickname;
+    @Column(name = "nickname")
+    private String nickname;
 //
 //    @Column(name = "phone_number")
 //    private String phoneNumber;
@@ -57,8 +57,9 @@ public class User extends BaseEntity {
 //    private List<Collection> collections = new ArrayList<>();
 
     @Builder
-    public User(Long userId){
-        this.userId = userId;
+    public User(String name, String nickname) {
+        this.name = name;
+        this.nickname = nickname;
     }
 
 }

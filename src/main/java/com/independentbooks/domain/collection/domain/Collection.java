@@ -58,7 +58,7 @@ public class Collection {
     }
 
     // 생성 메서드
-    public static Collection createCollection(User user, Content content, String description, Book... books) {
+    public static Collection createCollection(User user, Content content, String description, List<Book> books) {
         Collection collection = new Collection();
         collection.setUser(user);
         for (Book book : books) {

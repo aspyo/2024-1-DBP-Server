@@ -21,6 +21,6 @@ public class BookDetailRes {
     private String publisher;
     private String pubDate;
     private String isbn;
-    private List<Review> reviews;
+    private List<ReviewRes> reviews;
 
 }

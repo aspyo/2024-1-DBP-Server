@@ -47,7 +47,7 @@ public class Book extends BaseEntity {
     @Column(name="image", nullable = false) //도서 표지 이미지
     private String image;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
     @OneToMany(mappedBy = "book")
